@@ -11,7 +11,7 @@
 }
 
 :root {
-  /* Colors — inherit from personal site */
+  /* Colors — aligned with the K/S logo (kon-iro navy → seiji celadon) */
   --black: #0A0A0A;
   --black-soft: #1A1A1A;
   --gray-900: #2D2D2D;
@@ -22,14 +22,22 @@
   --gray-100: #F2F2F2;
   --gray-50: #FAFAFA;
   --white: #FFFFFF;
-  --accent: #E36414;
-  --accent-pale: #FCE8D9;
-  --ink: #1A1A1A;
+
+  /* Brand palette derived from the K/S monogram */
+  --navy: #1A2B4A;       /* "kon-iro" 紺色 — K letter, primary deep tone */
+  --navy-mid: #2D4A6E;   /* mid indigo where K and S meet */
+  --celadon: #6B8E8A;    /* "seiji-iro" 青磁色 — S letter, secondary tone */
+  --celadon-pale: #DCE4E2;  /* very pale celadon for backgrounds */
+  --accent: #6B8E8A;     /* main accent: celadon — corporate sub-color paired with navy */
+  --accent-strong: #2D4A6E; /* deeper variant for buttons/CTAs needing weight */
+  --accent-pale: #DCE4E2; /* pale celadon */
+  --ink: #1A2B4A;        /* body ink shifted from neutral black to deep navy */
 
   /* Typography */
   --font-display: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", "Instrument Serif", serif;
   --font-mono: "JetBrains Mono", "SF Mono", monospace;
+  --font-brand: "Poppins", "Noto Sans JP", sans-serif;  /* matches the wordmark in the K/S logo image */
 
   /* Spacing scale (more generous than personal site) */
   --space-xs: 0.5rem;
@@ -128,24 +136,59 @@ em {
 
 .nav-logo {
   display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  line-height: 1;
+}
+
+/* The K/S monogram image */
+.nav-logo::before {
+  content: "";
+  display: block;
+  width: 38px;
+  height: 38px;
+  background-image: url('images/logo-mark.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.nav-logo-text {
+  display: flex;
   flex-direction: column;
   gap: 0.1rem;
   line-height: 1.1;
 }
 
 .nav-logo-mark {
-  font-weight: 900;
-  font-size: 1.05rem;
-  letter-spacing: 0.04em;
+  font-family: var(--font-brand);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--navy);
 }
 
 .nav-logo-sub {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.18em;
   color: var(--gray-500);
   text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .nav-logo::before {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-logo-mark {
+    font-size: 0.9rem;
+  }
+  .nav-logo-sub {
+    font-size: 0.55rem;
+  }
 }
 
 .nav-links {
@@ -182,7 +225,7 @@ em {
 }
 
 .nav-cta:hover {
-  background: var(--accent);
+  background: var(--accent-strong);
   opacity: 1 !important;
 }
 
@@ -306,7 +349,8 @@ em {
   z-index: 0;
 }
 
-/* Gradient overlay for text legibility */
+/* Gradient overlay for text legibility — softened and slightly de-saturated
+   so the hero image's natural color variations can breathe through */
 .hero-image::after {
   content: "";
   position: absolute;
@@ -314,17 +358,17 @@ em {
   background:
     linear-gradient(
       to right,
-      rgba(10, 10, 10, 0.78) 0%,
-      rgba(10, 10, 10, 0.5) 38%,
-      rgba(10, 10, 10, 0.18) 65%,
-      rgba(10, 10, 10, 0.05) 100%
+      rgba(20, 32, 55, 0.55) 0%,
+      rgba(20, 32, 55, 0.32) 38%,
+      rgba(20, 32, 55, 0.10) 65%,
+      rgba(20, 32, 55, 0.01) 100%
     ),
     linear-gradient(
       to bottom,
-      rgba(10, 10, 10, 0.35) 0%,
-      rgba(10, 10, 10, 0.1) 25%,
-      rgba(10, 10, 10, 0.1) 70%,
-      rgba(10, 10, 10, 0.55) 100%
+      rgba(20, 32, 55, 0.18) 0%,
+      rgba(20, 32, 55, 0.04) 25%,
+      rgba(20, 32, 55, 0.04) 70%,
+      rgba(20, 32, 55, 0.32) 100%
     );
 }
 
@@ -355,9 +399,9 @@ em {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--celadon);
   animation: pulse 2.4s ease-in-out infinite;
-  box-shadow: 0 0 0 4px rgba(227, 100, 20, 0.15);
+  box-shadow: 0 0 0 4px rgba(107, 142, 138, 0.22);
 }
 
 @keyframes pulse {
@@ -394,11 +438,15 @@ em {
   text-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Hero内のem は暗い背景上で見やすいオレンジアクセントに */
+/* Hero 内の em は、青磁(ロゴ色)との同色被りを避けつつ控えめな差別化を出すため、
+   ほぼ白の中性色に、薄い青磁のグロー(影)を添える */
 .hero-sub em,
 .hero-headline em {
-  color: var(--accent);
-  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
+  color: #f0ebe3;  /* warm off-white — distinct from logo's celadon */
+  text-shadow:
+    0 0 24px rgba(107, 142, 138, 0.45),  /* soft celadon glow as a quiet echo of the logo */
+    0 1px 20px rgba(0, 0, 0, 0.4);
+  font-weight: 700;
 }
 
 .hero-meta {
@@ -719,7 +767,8 @@ section {
 }
 
 .cta-headline em {
-  color: var(--accent);
+  color: #a8c5c0;
+  text-shadow: 0 1px 16px rgba(26, 43, 74, 0.5);
 }
 
 .cta-lead {
@@ -745,7 +794,7 @@ section {
 }
 
 .cta-button:hover {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--white) !important;
   opacity: 1 !important;
   transform: translateY(-2px);
@@ -777,8 +826,20 @@ section {
   gap: 3rem;
 }
 
+.footer-brand-logo {
+  width: 44px;
+  height: 44px;
+  background-image: url('images/logo-mark-light.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 1rem;
+  opacity: 0.92;
+}
+
 .footer-brand-name {
-  font-size: 1.2rem;
+  font-family: var(--font-brand);
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--white);
   margin-bottom: 0.6rem;
@@ -1467,7 +1528,7 @@ section {
 }
 
 .form-submit:hover {
-  background: var(--accent);
+  background: var(--accent-strong);
   transform: translateY(-2px);
 }
 
@@ -1643,9 +1704,8 @@ section {
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.35;
+  opacity: 0.9;
   z-index: 0;
-  filter: grayscale(0.4) contrast(1.05);
 }
 
 .cta-image::after {
@@ -1654,13 +1714,13 @@ section {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 10, 10, 0.4) 0%,
-    rgba(10, 10, 10, 0.6) 100%
+    rgba(26, 43, 74, 0.4) 0%,
+    rgba(26, 43, 74, 0.6) 100%
   );
 }
 
 .cta > .container-narrow,
-.cta > * {
+.cta > *:not(.cta-image) {
   position: relative;
   z-index: 1;
 }
@@ -1741,6 +1801,12 @@ section {
   color: var(--gray-500);
 }
 
+/* When a background image is actually set on the placeholder, suppress the
+   fallback text overlay so the image alone reads cleanly. */
+.member-photo-placeholder.text-fallback[style*="background-image"] {
+  font-size: 0;
+}
+
 .member-card {
   padding-top: 3rem;
 }
@@ -1780,7 +1846,7 @@ section {
 
 /* Selection */
 ::selection {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--white);
 }
 
