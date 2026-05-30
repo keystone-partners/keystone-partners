@@ -23,15 +23,20 @@
   --gray-50: #FAFAFA;
   --white: #FFFFFF;
 
-  /* Brand palette derived from the K/S monogram */
-  --navy: #1A2B4A;       /* "kon-iro" 紺色 — K letter, primary deep tone */
-  --navy-mid: #2D4A6E;   /* mid indigo where K and S meet */
-  --celadon: #6B8E8A;    /* "seiji-iro" 青磁色 — S letter, secondary tone */
-  --celadon-pale: #DCE4E2;  /* very pale celadon for backgrounds */
-  --accent: #6B8E8A;     /* main accent: celadon — corporate sub-color paired with navy */
-  --accent-strong: #2D4A6E; /* deeper variant for buttons/CTAs needing weight */
-  --accent-pale: #DCE4E2; /* pale celadon */
-  --ink: #1A2B4A;        /* body ink shifted from neutral black to deep navy */
+  /* Brand palette — warm neutral edition (Aman Tokyo inspired).
+     Variable names retained from the cool edition for code-wide compatibility;
+     values are remapped to a smoked-sumi / walnut / aged-washi palette.
+     The KSP logo (navy × celadon) remains unchanged and reads as a quiet,
+     considered accent against the warm beige ground. */
+  --navy: #2D2A26;       /* 墨色 (smoked sumi) — primary deep tone for ink & footer */
+  --navy-mid: #3A2E26;   /* 深焙茶 (deep roasted brown) — mid tone */
+  --celadon: #6E5B43;    /* 胡桃色 (walnut) — secondary tone, em & accents */
+  --celadon-pale: #E8DFCE;  /* 老香色 (aged washi) — pale ground */
+  --accent: #6E5B43;     /* main accent: walnut — corporate sub-color paired with sumi */
+  --accent-strong: #8B7B4A; /* 真鍮 (tea-stained brass) — buttons / CTAs */
+  --accent-pale: #E8DFCE; /* aged washi */
+  --ink: #2D2A26;        /* body ink: smoked sumi (warmer than neutral black) */
+  --washi: #F3EEE7;      /* page ground: warm cream paper (Aman Tokyo beige) */
 
   /* Typography */
   --font-display: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
@@ -57,7 +62,7 @@ body {
   font-family: var(--font-display);
   font-weight: 400;
   color: var(--ink);
-  background: var(--white);
+  background: var(--washi);
   line-height: 1.8;
   font-feature-settings: "palt" 1;
   letter-spacing: 0.02em;
@@ -358,17 +363,17 @@ em {
   background:
     linear-gradient(
       to right,
-      rgba(20, 32, 55, 0.55) 0%,
-      rgba(20, 32, 55, 0.32) 38%,
-      rgba(20, 32, 55, 0.10) 65%,
-      rgba(20, 32, 55, 0.01) 100%
+      rgba(45, 42, 38, 0.55) 0%,
+      rgba(45, 42, 38, 0.32) 38%,
+      rgba(45, 42, 38, 0.10) 65%,
+      rgba(45, 42, 38, 0.01) 100%
     ),
     linear-gradient(
       to bottom,
-      rgba(20, 32, 55, 0.18) 0%,
-      rgba(20, 32, 55, 0.04) 25%,
-      rgba(20, 32, 55, 0.04) 70%,
-      rgba(20, 32, 55, 0.32) 100%
+      rgba(45, 42, 38, 0.18) 0%,
+      rgba(45, 42, 38, 0.04) 25%,
+      rgba(45, 42, 38, 0.04) 70%,
+      rgba(45, 42, 38, 0.32) 100%
     );
 }
 
@@ -401,7 +406,7 @@ em {
   border-radius: 50%;
   background: var(--celadon);
   animation: pulse 2.4s ease-in-out infinite;
-  box-shadow: 0 0 0 4px rgba(107, 142, 138, 0.22);
+  box-shadow: 0 0 0 4px rgba(110, 91, 67, 0.22);
 }
 
 @keyframes pulse {
@@ -438,13 +443,13 @@ em {
   text-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Hero 内の em は、青磁(ロゴ色)との同色被りを避けつつ控えめな差別化を出すため、
-   ほぼ白の中性色に、薄い青磁のグロー(影)を添える */
+/* Hero 内の em は、walnut(ロゴ色とは別の暖色アクセント)との同色被りを避けつつ
+   控えめな差別化を出すため、ほぼ白の暖色中性色に、薄い walnut グロー(影)を添える */
 .hero-sub em,
 .hero-headline em {
-  color: #f0ebe3;  /* warm off-white — distinct from logo's celadon */
+  color: #f0ebe3;  /* warm off-white */
   text-shadow:
-    0 0 24px rgba(107, 142, 138, 0.45),  /* soft celadon glow as a quiet echo of the logo */
+    0 0 24px rgba(110, 91, 67, 0.45),  /* soft walnut glow */
     0 1px 20px rgba(0, 0, 0, 0.4);
   font-weight: 700;
 }
@@ -768,7 +773,7 @@ section {
 
 .cta-headline em {
   color: #a8c5c0;
-  text-shadow: 0 1px 16px rgba(26, 43, 74, 0.5);
+  text-shadow: 0 1px 16px rgba(45, 42, 38, 0.5);
 }
 
 .cta-lead {
@@ -1721,8 +1726,8 @@ section {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 43, 74, 0.4) 0%,
-    rgba(26, 43, 74, 0.6) 100%
+    rgba(45, 42, 38, 0.4) 0%,
+    rgba(45, 42, 38, 0.6) 100%
   );
 }
 
